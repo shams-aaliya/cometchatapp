@@ -1,6 +1,6 @@
 import './App.css';
 import { Fragment } from 'react';
-import CometChatUI from './components/CometChatUI';
+import CometChatUI from './components/CometChatUi';
 import { Switch,Route,useHistory } from 'react-router-dom';
 // import Login from './components/login';
 
@@ -10,7 +10,6 @@ import { CometChat } from '@cometchat-pro/chat';
 const App = () => {
   const [uid,setUID] = useState("");
   const [userdetail,setuserdetail] = useState({});
-  const [namee,setnamee] = useState("Aaliya");
   let history = useHistory();
 
 
@@ -25,11 +24,7 @@ const App = () => {
       {
       console.log('Login Successful:', { user })
       setuserdetail(user)
-      setTimeout(()=>{console.log(userdetail)},5000)
-      
       history.push('/cometchatui')
-      // console.log(history)
-      
       }
       )
       .catch((error)=>console.log(error))
@@ -42,12 +37,12 @@ const App = () => {
     }
   
   const logout = () =>{
-    CometChat.logout().then(
-      ()=>{
-      setuserdetail({})
-      console.log('Logout sucessfull')
-      })
-  }
+      CometChat.logout().then(
+        ()=>{
+        setuserdetail({})
+        console.log('Logout sucessfull')
+        })
+    }
   return (
     <div className="App">
     <Switch>
@@ -76,7 +71,7 @@ const App = () => {
             </Fragment>
           }
     />   
-    <Route path='/cometchatui' render={()=> <CometChatUI name={userdetail} />} />
+    <Route path='/cometchatui' render={()=> <CometChatUI userdetail={userdetail} />} />
     </Switch> 
 
     </div>
